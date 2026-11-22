@@ -1,4 +1,5 @@
 const Therapist = require('../models/Therapist');
+const RESERVED = ['login', 'register', 'dashboard', 'api', 'admin'];
 
 function slugify(text) {
     return text
@@ -14,7 +15,7 @@ async function generateUniqueSlug(name) {
     let count = 2; 
 
     // checkin slug exists in db
-    while (await Therapist.exists({ slug})) {
+    while (RESERVED.includes(slug) || await Therapist.exists({ slug }) ) {
         slug = `${base}-${count}`; // if exists, append a num to make it unique
         count++;
     }

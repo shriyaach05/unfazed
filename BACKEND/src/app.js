@@ -1,5 +1,5 @@
 const express = require('express');
-const cors = require('cors'); // Import the CORS middleware
+const cors = require('cors');
 const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
@@ -13,6 +13,10 @@ app.get('/api/health', (req, res) => {
 
 const authRoutes = require('./routes/authRoutes');
 app.use('/api/auth', authRoutes);
+
+const therapistRoutes = require('./routes/therapistRoutes');
+app.use('/api/therapists', therapistRoutes);
+
 app.use(errorHandler);
 
 module.exports = app;
